@@ -5,8 +5,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Digite o número de alunos da disciplina C125/C206!");
 
-        Scanner entrada = new Scanner(System.in);
-        int alunos = entrada.nextInt();
+        Scanner scan = new Scanner(System.in);
+        int alunos = scan.nextInt();
+
+        scan.close();
 
         switch(alunos){
             case 10, 20:
@@ -17,7 +19,6 @@ public class Main {
                 break;
             default:
                 System.out.println("Número de alunos não é válido!");
-
         }
     }
 }
