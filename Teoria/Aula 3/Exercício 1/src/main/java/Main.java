@@ -8,9 +8,7 @@ public class Main {
         int soma = partida1 + partida2 + partida3;
         float media = (float)(soma/3);
 
-        System.out.print("A soma dos Zumbis mortos foi de: ");
-        System.out.println(soma);
-        System.out.print("A média de Zumbis mortos foi de: ");
-        System.out.println(media);
+        System.out.print("A soma dos Zumbis mortos foi de: " + soma);
+        System.out.print("A média de Zumbis mortos foi de: " + media);
     }
 }
