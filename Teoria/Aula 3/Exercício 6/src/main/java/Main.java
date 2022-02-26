@@ -3,25 +3,30 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int numDigitado;
+        int numDigitado; //Variável para armazenar o número digitado
 
-        Scanner entrada = new Scanner(System.in);
+        //Geração de número aleatório
         Random rand = new Random();
         int x = rand.nextInt(10) + 1;
 
         System.out.println("Qual foi o número gerado?");
 
-        numDigitado = entrada.nextInt();
-        while(x != numDigitado) {
-            if(numDigitado > x){
-                System.out.println("O número gerado é menor que esse aí.");
-            }
-            else{
-                System.out.println("O número gerado é maior que esse aí.");
-            }
-            numDigitado = entrada.nextInt();
-        }
+        Scanner scan = new Scanner(System.in);
 
-        System.out.println("Você acertou!!");
+        do{
+            numDigitado = scan.nextInt();
+
+            if(numDigitado > x)
+                System.out.println("O número gerado é menor que esse aí.");
+
+            else if(numDigitado < x)
+                System.out.println("O número gerado é maior que esse aí.");
+
+            else
+                System.out.println("Você acertou!!");
+
+        }while(numDigitado != x);
+
+        scan.close();
     }
 }
