@@ -11,7 +11,7 @@ public class Main3 {
 
         System.out.println("Digite 2 números:");
 
-        // Leitura de dados
+        //Leitura de dados
         a = scan.nextInt();
         b = scan.nextInt();
 
