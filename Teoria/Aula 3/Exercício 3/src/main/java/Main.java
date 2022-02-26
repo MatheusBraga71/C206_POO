@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Digite a nota da NPA!");
 
-        Scanner entrada = new Scanner(System.in);
-        float NPA = entrada.nextFloat();
+        Scanner scan = new Scanner(System.in);
+        float NPA = scan.nextFloat();
 
         if(NPA >= 60) {
             System.out.println("Você está aprovado! :)");
@@ -13,7 +13,7 @@ public class Main {
         else{
             System.out.println("Digite a nota da NP3!");
 
-            float NP3 = entrada.nextFloat();
+            float NP3 = scan.nextFloat();
             float media = (NPA + NP3)/2;
 
             if(media >= 50){
@@ -23,6 +23,7 @@ public class Main {
                 System.out.println("Você está Reprovado! :(");
             }
         }
+        scan.close();
     }
 
 }
