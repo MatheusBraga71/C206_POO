@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // EXERCÍCIO 1:
+        //EXERCÍCIO 1:
         System.out.println("EXERCÍCIO 1:");
 
         System.out.println("Digite 1 para a Lógica 'E' ou 2 para a Lógica 'OU'");
@@ -33,10 +33,5 @@ public class Main {
             default:
                 break;
         }
-
-        // EXERCÍCIO 2:
-        System.out.println("EXERCÍCIO 2:");
-
-
     }
 }
