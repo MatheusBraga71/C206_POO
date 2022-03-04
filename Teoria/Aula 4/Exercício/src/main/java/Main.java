@@ -5,7 +5,7 @@ public class Main {
         // Criação de um objeto Ashen
         Ashen p = new Ashen();
         p.vida = 100;
-        p.nome = "DeadMan";
+        p.nome = "Kyle Crane";
 
         // Criação de um objeto Arma
         Arma arma = new Arma();
