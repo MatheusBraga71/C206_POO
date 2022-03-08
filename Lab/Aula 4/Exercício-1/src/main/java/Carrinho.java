@@ -4,7 +4,7 @@ public class Carrinho {
     Produto[] produtos;
 
     void exibirInfos(){
-        for (int i = 0, produtosLength = produtos.length; i < produtosLength; i++) {
+        for (int i = 0; i < produtos.length; i++) {
             if (produtos[i] != null) {
                 Produto produto = produtos[i];
                 System.out.println(produto.nome);
