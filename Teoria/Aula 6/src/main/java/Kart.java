@@ -14,7 +14,7 @@ public class Kart {
     }
 
     public void soltarTurbo(){
-        System.out.println("Kart " + nome + " está soltando turbo!");
+        System.out.println("Kart " + nome + " está soltando turbo! ");
     }
 
     public void fazerDrift(){

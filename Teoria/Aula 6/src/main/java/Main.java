@@ -9,34 +9,30 @@ public class Main {
         kart2.nome = "kart2";
 
         kart1.motor.cilindradas = "100";
-        kart1.motor.velocidadeMaxima = 100;
+        kart1.motor.velocidadeMaxima = 120.02f;
 
         kart2.motor.cilindradas = "150";
-        kart2.motor.velocidadeMaxima = 100;
+        kart2.motor.velocidadeMaxima = 110.0f;
+
+        Piloto piloto1 = new Piloto();
+        Piloto piloto2 = new Piloto();
+
+        piloto1.nome = "piloto1";
+        piloto2.nome = "piloto2";
+
+        kart1.piloto = piloto1;
+        kart2.piloto = piloto2;
+
+        piloto1.soltaSuperPoder();
+        piloto2.soltaSuperPoder();
+
+        kart1.fazerDrift();
+        kart2.fazerDrift();
+
+        kart1.motor.mostrainfo();;
+        kart2.motor.mostrainfo();
 
         /*
-        Piloto p1 = new Piloto();
-        p1.nome = "Bowser";
-        p1.vilao = true;
-
-        Piloto p2 = new Piloto();
-        p2.nome = "Yoshi";
-        p2.vilao = false;
-
-        Kart kart1 = new Kart();
-        kart1.nome = "Maverick";
-        kart1.piloto = p1;
-        kart1.motor.cilindradas = "100";
-        kart1.motor.velocidadeMaxima = 100;
-
-        Kart kart2 = new Kart();
-        kart2.nome = "Fuscão";
-        kart2.piloto = p2;
-        kart2.motor.cilindradas = "150";
-        kart2.motor.velocidadeMaxima = 98;
-
-
-         */
         kart1.pular();
         kart1.fazerDrift();
         kart1.soltarTurbo();
@@ -48,7 +44,7 @@ public class Main {
         kart2.soltarTurbo();
         kart2.piloto.soltaSuperPoder();
         kart2.motor.mostrainfo();
-
+*/
 
     }
 }
