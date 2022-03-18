@@ -14,6 +14,10 @@ public class Nave {
         this.tipoTiro = tipoTiro;
     }
 
+    public void setTipoTiro(String tipoTiro) {
+        this.tipoTiro = tipoTiro;
+    }
+
     public void atirar(Asteroide ast){
 
         if(ast.getTipoAsteroide().equals("Grande") && tipoTiro.equals("Explosivo")){

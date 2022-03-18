@@ -9,8 +9,16 @@ public class Main {
 
         Nave nave = new Nave("Fox II", 100, "Normal");
 
-        Asteroide asteroide = new Asteroide("Giga", "Grande");
+        Asteroide asteroide1 = new Asteroide("Giga", "Pequeno");
+        Asteroide asteroide2 = new Asteroide("Mega", "Grande");
+        Asteroide asteroide3 = new Asteroide("Giga", "Pequeno");
 
-        nave.atirar(asteroide);
+        nave.atirar(asteroide1);
+        nave.atirar(asteroide2);
+        nave.atirar(asteroide3);
+
+        nave.setTipoTiro("Explosivo");
+
+        nave.atirar(asteroide2);
     }
 }
