@@ -1,8 +1,18 @@
 package br.inatel.cdg.conta;
 
+import br.inatel.cdg.cliente.Cliente;
+
 public class Conta {
 
-    private int qtdClientes;
+    private static int qtdClientes = 0;
+
+    private Cliente cliente;
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        qtdClientes++;
+    }
+
     private double saldo;
 
     public void depositar(double valor){
@@ -14,6 +24,6 @@ public class Conta {
     }
 
     public void extrato(){
-        System.out.println("Saldo = " saldo);
+        System.out.println("Saldo do cliente " + cliente.nome + ": " + saldo);
     }
 }
