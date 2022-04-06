@@ -32,7 +32,7 @@ public class Banda {
         System.out.println("Musicas: ");
         for(int i = 0; i < musicas.length; i++){
             if(musicas[i] != null){
-                System.out.println("Nome: " + musicas[i].getNome() + ". Duração: " + musicas[i].getDuracao());
+                System.out.println("Nome: " + musicas[i].getNome() + ". Duração: " + musicas[i].getDuracao() + " minutos.");
             }
         }
 
