@@ -1,5 +1,7 @@
 package treino.av2.funcionario;
 
+import treino.av2.carro.Carro;
+
 public abstract class Funcionario {
 
     public static int contador = 0;
@@ -8,11 +10,14 @@ public abstract class Funcionario {
     private String nome;
     private double salario;
 
-    public Funcionario(String nome, double salario){
+    Carro carro;
+
+    public Funcionario(String nome, double salario, Carro carro){
         this.nome = nome;
         this.salario = salario;
         contador++;
         matricula = contador;
+        this.carro = carro;
     }
 
     public String getNome() {

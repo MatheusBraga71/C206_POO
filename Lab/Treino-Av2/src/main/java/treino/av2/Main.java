@@ -1,5 +1,6 @@
 package treino.av2;
 
+import treino.av2.carro.Carro;
 import treino.av2.funcionario.Contador;
 import treino.av2.funcionario.Funcionario;
 import treino.av2.funcionario.GerenteRegional;
@@ -15,9 +16,14 @@ public class Main {
 
         Funcionario[] funcionarios = new Funcionario[5];
 
+        Carro c1 = new Carro("Preto", "Porsche");
+        Carro c2 = new Carro("Azul", "Mustang");
+        Carro c3 = new Carro("Vermelho", "Ferrari");
+
         funcionarios[0] = gerenteRegional;
         funcionarios[1] = vendedor;
         funcionarios[2] = contador;
+
 
         for(Funcionario funcionario : funcionarios){
             if(funcionario instanceof GerenteRegional){
