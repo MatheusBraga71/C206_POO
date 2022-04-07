@@ -4,7 +4,6 @@ import treino.av2.funcionario.Contador;
 import treino.av2.funcionario.Funcionario;
 import treino.av2.funcionario.GerenteRegional;
 import treino.av2.funcionario.Vendedor;
-import treino.av2.interfaces.Venda;
 
 public class Main {
 
