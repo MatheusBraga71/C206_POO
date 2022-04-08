@@ -12,12 +12,15 @@ public abstract class Funcionario {
 
     Carro carro;
 
-    public Funcionario(String nome, double salario, Carro carro){
+    public void setCarro(Carro carro){
+        this.carro = carro;
+    }
+
+    public Funcionario(String nome, double salario){
         this.nome = nome;
         this.salario = salario;
         contador++;
         matricula = contador;
-        this.carro = carro;
     }
 
     public String getNome() {
@@ -39,8 +42,12 @@ public abstract class Funcionario {
     public abstract void recebeSalario();
 
     public void mostraInfo(){
+        System.out.println("Dados do funcionário: ");
         System.out.println("Matricula: " + matricula);
         System.out.println("Nome: " + nome);
         System.out.println("Salário: " + salario);
+        System.out.println("Carro do funcionário:" );
+        System.out.println("Cor: " + carro.getCor());
+        System.out.println("Marca: " + carro.getMarca());
     }
 }

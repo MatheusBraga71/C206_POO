@@ -24,6 +24,9 @@ public class Main {
         funcionarios[1] = vendedor;
         funcionarios[2] = contador;
 
+        funcionarios[0].setCarro(c1);
+        funcionarios[1].setCarro(c2);
+        funcionarios[2].setCarro(c3);
 
         for(Funcionario funcionario : funcionarios){
             if(funcionario instanceof GerenteRegional){
