@@ -25,6 +25,8 @@ public class Guilda {
     }
 
     public void mostraInfo(){
+
+        System.out.println("Número de personagens criados: " + Personagem.getPersonagensCriados());
         System.out.println("Nome da Guilda: " + nome);
         for (Personagem membro : membros) {
             if (membro != null) {
