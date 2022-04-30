@@ -2,7 +2,7 @@ package av2.c206L3.interfaces;
 
 public interface Horda {
 
-    public void ForTheHorde();
+    void ForTheHorde();
 
-    public void InvadirAlianca();
+    void InvadirAlianca();
 }
