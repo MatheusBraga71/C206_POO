@@ -2,7 +2,6 @@ package br.inatel.cdg;
 
 import br.inatel.cdg.calculadora.Calculadora;
 
-import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
