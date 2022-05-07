@@ -54,7 +54,7 @@ public class Main {
         }
         System.out.println("----------------------");
         // Ordenando de forma decrescente
-        Collections.sort(listaCarros);
+        Collections.sort(listaCarros, Collections.reverseOrder());
 
         // Depois de ordenar
         System.out.println("Exibindo após ordenar por preço de forma decrescente: ");

@@ -20,10 +20,10 @@ public abstract class Carro implements Comparable<Carro>{
     @Override
     public int compareTo(Carro o) {
         if(this.preco < o.getPreco()){
-            return 1;
+            return -1;
         }
         if(this.preco > o.getPreco()){
-            return -1;
+            return 1;
         }
         return 0;
     }
