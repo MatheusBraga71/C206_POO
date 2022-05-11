@@ -1,8 +1,8 @@
 package br.inatel.cdg;
 
 import br.inatel.cdg.calculadora.Calculadora;
+import br.inatel.cdg.exception.DivisaoPorZeroException;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,62 +16,52 @@ public class Main {
         double num1 = 0;
         double num2 = 0;
 
-        boolean error;
-
-        String choice = "S";
+        String flag;
+        String operador;
+        double res;
 
         System.out.println("Esta é a sua calculadora, a operação será feita na ordem de entrada dos números!");
-        do {
-            String operador;
-            error = false;
-            try {
-                System.out.println("Digite o primeiro número: ");
-                num1 = sc.nextDouble();
-                System.out.println("Digite o segundo número: ");
-                num2 = sc.nextDouble();
-                sc.nextLine();
+
+        String escolha;
+
+        System.out.println("Digite o primeiro número: ");
+        num1 = sc.nextDouble();
+        System.out.println("Digite o segundo número: ");
+        num2 = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.println("Digite a operação desejada -> Soma = +; Subt = -; Mult = *; Div = /");
+        operador = sc.nextLine();
+
+
+            switch (operador) {
+                case "+":
+                    res = c1.soma(num1, num2);
+                    System.out.println(num1 + " + " + num2 + " = " + res);
+                    break;
+
+                case "-":
+                    res = c1.subtracao(num1, num2);
+                    System.out.println(num1 + " - " + num2 + " = " + res);
+                    break;
+                case "*":
+                    res = c1.multiplicacao(num1, num2);
+                    System.out.println(num1 + " * " + num2 + " = " + res);
+                    break;
+                case "/":
+                    try {
+                        res = c1.divisao(num1, num2);
+                        System.out.println(num1 + " / " + num2 + " = " + res);
+                    } catch (Throwable t) {
+                        System.out.println(t);
+                    }
+                    break;
+
+                default:
+                    System.out.println("Operação inválida.");
+                    break;
             }
-            catch (InputMismatchException e){
-                System.out.println("Só é permitida a entrada de números.");
-                System.out.println("O processo será encerrado!");
-                sc.nextLine();
-                error = true;
-            }
-
-            if(error == false) {
-                System.out.println("Digite a operação desejada:");
-                System.out.println("+ para somar | - para subtrair | * para multiplicar | / para dividir");
-
-                operador = sc.nextLine();
-
-                switch (operador) {
-                    case "+":
-                        System.out.println(num1 + " + " + num2 + " = " + c1.soma(num1, num2));
-
-                        break;
-                    case "-":
-                        System.out.println(num1 + " - " + num2 + " = " + c1.subtracao(num1, num2));
-                        break;
-                    case "*":
-                        System.out.println(num1 + " * " + num2 + " = " + c1.multiplicacao(num1, num2));
-                        break;
-                    case "/":
-                        if (num2 == 0) {
-                            System.out.println("Não existe divisão por zero! Operação não realizada.");
-                        } else
-                            System.out.println(num1 + " / " + num2 + " = " + c1.divisao(num1, num2));
-                        break;
-                    default:
-                        System.out.println("Operação inválida.");
-                }
-
-                System.out.println("Deseja continuar calculando? S ou N");
-                choice = sc.nextLine();
-            }
-
-
-        }while(choice.equals("S") && !(error));
-
         sc.close();
     }
-}
+    }
+
