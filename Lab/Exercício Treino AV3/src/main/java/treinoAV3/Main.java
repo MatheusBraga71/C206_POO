@@ -36,7 +36,8 @@ public class Main {
                     j.setNome(sc.nextLine());
                     System.out.println("Digite o preço do jogo: ");
                     try{
-                        j.setPreco(sc.nextDouble());
+                        double var= sc.nextDouble();
+                        j.setPreco(var);
                     } catch(PrecoNegativo e){
                         e.printStackTrace();
                         break;
