@@ -15,4 +15,11 @@ public class Cliente {
         System.out.println("CPF: " + cpf);
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public int getCpf() {
+        return cpf;
+    }
 }

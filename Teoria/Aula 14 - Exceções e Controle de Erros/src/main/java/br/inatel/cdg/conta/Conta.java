@@ -16,6 +16,10 @@ public class Conta {
         this.limite = limite;
     }
 
+    public void addCliente(Cliente cliente){
+        clientes.add(cliente);
+    }
+
     public boolean sacar(double quantia){
         this.saldo -= quantia;
         return false;
@@ -27,9 +31,10 @@ public class Conta {
 
         for(Cliente cliente : clientes){
             try{
-                System.out.println(cliente);
+                System.out.println("Nome do cliente: " + cliente.getNome());
+                System.out.println("CPF do cliente: " + cliente.getCpf());
             }catch(NullPointerException e){
-                System.out.println(e);
+                System.out.println("Não existe cliente nessa posição!");
             }
         }
     }

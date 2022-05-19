@@ -3,9 +3,6 @@ package br.inatel.cdg;
 import br.inatel.cdg.cliente.Cliente;
 import br.inatel.cdg.conta.Conta;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -15,6 +12,10 @@ public class Main {
         Cliente c3 = null;
 
         Conta conta = new Conta(500, 100);
+
+        conta.addCliente(c1);
+        conta.addCliente(c2);
+        conta.addCliente(c3);
 
         conta.mostraInfo();
 
