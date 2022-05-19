@@ -11,10 +11,9 @@ public class Conta {
     private double limite;
     private Set<Cliente> clientes = new HashSet<>();
 
-    public Conta(double saldo, double limite, Cliente cliente){
+    public Conta(double saldo, double limite){
         this.saldo = saldo;
         this.limite = limite;
-        clientes.add(cliente);
     }
 
     public boolean sacar(double quantia){
