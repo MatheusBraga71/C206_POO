@@ -35,13 +35,38 @@ public class DonoDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public boolean atualizarDono(String cpf, Dono dono) {
+    public boolean atualizarCPFDono(String cpf, String ncpf) {
+        connectToDB();
+        String sql = "UPDATE Dono SET cpf=? where cpf=?";
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, ncpf);
+            pst.setString(2, cpf);
+            pst.execute();
+            sucesso = true;
+
+        } catch(SQLException ex) {
+            System.out.println("Erro = " +  ex.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch(SQLException exc) {
+                System.out.println("Erro: " + exc.getMessage());
+            }
+        }
+        return sucesso;
+    }
+
+    public boolean atualizarNomeDono(String cpf, String nome) {
         connectToDB();
         String sql = "UPDATE Dono SET nome=? where cpf=?";
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, dono.getNome());
+            pst.setString(1, nome);
             pst.setString(2, cpf);
             pst.execute();
             sucesso = true;

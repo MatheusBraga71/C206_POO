@@ -37,7 +37,8 @@ public class CarroDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    public boolean atualizarCarro(int numeroChassi, Carro carro) {
+    /*
+    public boolean atualizarCarro(int numeroChassi, Carro carro) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
         connectToDB();
         String sql = "UPDATE Carro SET cor=?, modelo=?, Dono_cpf=? where numeroChassi=?";
 
@@ -47,6 +48,57 @@ public class CarroDAO extends ConnectionDAO{
             pst.setString(2, carro.getModelo());
             pst.setString(3, carro.getDono_cpf());
             pst.setInt(4, numeroChassi);
+            pst.execute();
+            sucesso = true;
+
+        } catch(SQLException ex) {
+            System.out.println("Erro = " +  ex.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch(SQLException exc) {
+                System.out.println("Erro: " + exc.getMessage());
+            }
+        }
+        return sucesso;
+    }
+    */
+
+    public boolean atualizarCorCarro(int numeroChassi, String cor) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
+        connectToDB();
+        String sql = "UPDATE Carro SET cor=? where numeroChassi=?";
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, cor);
+            pst.setInt(2, numeroChassi);
+            pst.execute();
+            sucesso = true;
+
+        } catch(SQLException ex) {
+            System.out.println("Erro = " +  ex.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch(SQLException exc) {
+                System.out.println("Erro: " + exc.getMessage());
+            }
+        }
+        return sucesso;
+    }
+
+    public boolean atualizarModeloCarro(int numeroChassi, String modelo) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
+        connectToDB();
+        String sql = "UPDATE Carro SET modelo=? where numeroChassi=?";
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, modelo);
+            pst.setInt(2, numeroChassi);
             pst.execute();
             sucesso = true;
 
@@ -99,7 +151,7 @@ public class CarroDAO extends ConnectionDAO{
             System.out.println("Lista de Carros: ");
             while (rs.next()) {
                 Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"));
-            carroAux.setDono_cpf(rs.getString("Dono_cpf"));
+                carroAux.setDono_cpf(rs.getString("Dono_cpf"));
                 System.out.println("Numero do Chassi = " + carroAux.getNumeroChassi());
                 System.out.println("Cor = " + carroAux.getCor());
                 System.out.println("Modelo = " + carroAux.getModelo());

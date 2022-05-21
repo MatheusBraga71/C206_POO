@@ -9,4 +9,20 @@ public class Documento {
         this.renavam = renavam;
         this.anoDoVeiculo = anoDoVeiculo;
     }
+
+    public int getRenavam() {
+        return renavam;
+    }
+
+    public void setRenavam(int renavam) {
+        this.renavam = renavam;
+    }
+
+    public String getAnoDoVeiculo() {
+        return anoDoVeiculo;
+    }
+
+    public void setAnoDoVeiculo(String anoDoVeiculo) {
+        this.anoDoVeiculo = anoDoVeiculo;
+    }
 }

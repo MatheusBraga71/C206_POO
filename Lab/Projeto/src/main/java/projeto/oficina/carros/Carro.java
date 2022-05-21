@@ -1,12 +1,13 @@
 package projeto.oficina.carros;
 
+import projeto.oficina.DAO.DocumentoDAO;
+
 public class Carro {
 
     private int numeroChassi;
     private String cor;
     private String modelo;
     private String Dono_cpf;
-
 
     public Carro(int numeroChassi, String cor, String modelo){
         this.numeroChassi = numeroChassi;
@@ -45,5 +46,6 @@ public class Carro {
     public void setDono_cpf(String dono_cpf) {
         Dono_cpf = dono_cpf;
     }
+
 }
 

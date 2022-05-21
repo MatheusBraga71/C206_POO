@@ -20,17 +20,21 @@ public class Main {
         d1.setCpf("123456");
         d1.setNome("João");
 
-        carro.setDono_cpf(d1.getCpf());
-
-        //dDAO.inserirDono(d1);
-
-        //cDAO.inserirCarro(carro);
+        Dono d2 = new Dono();
+        d2.setCpf("12");
+        d2.setNome("45");
 
         cDAO.buscarCarrosSemFiltro();
 
-        cDAO.buscarCarroPorNumeroDoChassi(12345);
 
-        cDAO.deletarCarro(12345);
+
+        //carro.setDono_cpf(d1.getCpf());
+
+        //dDAO.inserirDono(d1);
+
+
+        //cDAO.inserirCarro(carro);
+
 
         //dDAO.buscarDonoPorCPF("3");
 
