@@ -13,14 +13,16 @@ public class CarroDAO extends ConnectionDAO{
 
     public boolean inserirCarro(Carro carro) {
         connectToDB();
-        String sql = "INSERT INTO Carro (numeroChassi,cor,modelo,Dono_cpf) values(?,?,?,?)";
+        String sql = "INSERT INTO Carro (numeroChassi,cor,modelo,Documento_renavam, Dono_cpf,Mecanico_cpf) values(?,?,?,?,?,?)";
 
         try { //pst é um comando utilizado para a preparação do comando, usado quando se passa algo por parâmetro
             pst = con.prepareStatement(sql);
             pst.setInt(1, carro.getNumeroChassi());
             pst.setString(2, carro.getCor());
             pst.setString(3, carro.getModelo());
-            pst.setString(4, carro.getDono_cpf());
+            pst.setInt(4, carro.getDocumento_renavam());
+            pst.setString(5, carro.getDono_cpf());
+            pst.setString(6, carro.getMecanico_cpf());
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -150,12 +152,14 @@ public class CarroDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Carros: ");
             while (rs.next()) {
-                Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"));
+                Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
                 carroAux.setDono_cpf(rs.getString("Dono_cpf"));
                 System.out.println("Numero do Chassi = " + carroAux.getNumeroChassi());
                 System.out.println("Cor = " + carroAux.getCor());
                 System.out.println("Modelo = " + carroAux.getModelo());
+                System.out.println("Renavam do carro: " + carroAux.getDocumento_renavam());
                 System.out.println("CPF do Dono = " + carroAux.getDono_cpf());
+                System.out.println("CPF do Mecanico Responsável: " + carroAux.getMecanico_cpf());
                 System.out.println("--------------------------------");
                 listaDeCarros.add(carroAux);
             }
@@ -187,12 +191,14 @@ public class CarroDAO extends ConnectionDAO{
                 {
                     sucesso = false;
                 } else {
-                    carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"));
+                    carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
                     carroAux.setDono_cpf(rs.getString("Dono_cpf"));
                     System.out.println("Numero do Chassi = " + carroAux.getNumeroChassi());
                     System.out.println("Cor = " + carroAux.getCor());
                     System.out.println("Modelo = " + carroAux.getModelo());
+                    System.out.println("Renavam do carro: " + carroAux.getDocumento_renavam());
                     System.out.println("CPF do Dono = " + carroAux.getDono_cpf());
+                    System.out.println("CPF do Mecanico Responsável: " + carroAux.getMecanico_cpf());
                     System.out.println("--------------------------------");
                 }
             }

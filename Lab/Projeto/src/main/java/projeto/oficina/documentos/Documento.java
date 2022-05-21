@@ -3,9 +3,9 @@ package projeto.oficina.documentos;
 public class Documento {
 
     private int renavam;
-    private String anoDoVeiculo;
+    private int anoDoVeiculo;
 
-    public Documento(int renavam, String anoDoVeiculo){
+    public Documento(int renavam, int anoDoVeiculo){
         this.renavam = renavam;
         this.anoDoVeiculo = anoDoVeiculo;
     }
@@ -18,11 +18,11 @@ public class Documento {
         this.renavam = renavam;
     }
 
-    public String getAnoDoVeiculo() {
+    public int getAnoDoVeiculo() {
         return anoDoVeiculo;
     }
 
-    public void setAnoDoVeiculo(String anoDoVeiculo) {
+    public void setAnoDoVeiculo(int anoDoVeiculo) {
         this.anoDoVeiculo = anoDoVeiculo;
     }
 }

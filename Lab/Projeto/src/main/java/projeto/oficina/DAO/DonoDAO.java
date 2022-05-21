@@ -119,9 +119,7 @@ public class DonoDAO extends ConnectionDAO {
             rs = st.executeQuery(sql);
             System.out.println("Lista de donos: ");
             while (rs.next()) {
-                Dono donoAux = new Dono();
-                donoAux.setNome(rs.getString("nome"));
-                donoAux.setCpf(rs.getString("cpf"));
+                Dono donoAux = new Dono(rs.getString("Nome"), rs.getString("cpf"));
                 System.out.println("nome = " + donoAux.getNome());
                 System.out.println("cpf = " + donoAux.getCpf());
                 System.out.println("--------------------------------");
@@ -155,9 +153,7 @@ public class DonoDAO extends ConnectionDAO {
                 {
                     sucesso = false;
                 } else {
-                    donoAux = new Dono();
-                    donoAux.setNome(rs.getString("nome"));
-                    donoAux.setCpf(rs.getString("cpf"));
+                    donoAux = new Dono(rs.getString("nome"), rs.getString("cpf"));
                     System.out.println("nome = " + donoAux.getNome());
                     System.out.println("marca = " + donoAux.getCpf());
                     System.out.println("--------------------------------");

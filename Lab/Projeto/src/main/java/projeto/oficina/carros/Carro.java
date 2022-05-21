@@ -7,12 +7,17 @@ public class Carro {
     private int numeroChassi;
     private String cor;
     private String modelo;
+    private int Documento_renavam;
     private String Dono_cpf;
+    private String Mecanico_cpf;
 
-    public Carro(int numeroChassi, String cor, String modelo){
+    public Carro(int numeroChassi, String cor, String modelo,int Documento_renavam, String Dono_cpf, String Mecanico_cpf){
         this.numeroChassi = numeroChassi;
         this.cor = cor;
         this.modelo = modelo;
+        this.Documento_renavam = Documento_renavam;
+        this.Dono_cpf = Dono_cpf;
+        this.Mecanico_cpf = Mecanico_cpf;
     }
 
     public int getNumeroChassi() {
@@ -39,6 +44,14 @@ public class Carro {
         this.modelo = modelo;
     }
 
+    public int getDocumento_renavam() {
+        return Documento_renavam;
+    }
+
+    public void setDocumento_renavam(int documento_renavam) {
+        Documento_renavam = documento_renavam;
+    }
+
     public String getDono_cpf() {
         return Dono_cpf;
     }
@@ -47,5 +60,12 @@ public class Carro {
         Dono_cpf = dono_cpf;
     }
 
+    public String getMecanico_cpf() {
+        return Mecanico_cpf;
+    }
+
+    public void setMecanico_cpf(String mecanico_cpf) {
+        Mecanico_cpf = mecanico_cpf;
+    }
 }
 

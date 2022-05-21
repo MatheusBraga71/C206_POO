@@ -1,15 +1,128 @@
 package projeto.oficina;
 
 import projeto.oficina.DAO.CarroDAO;
+import projeto.oficina.DAO.DocumentoDAO;
 import projeto.oficina.DAO.DonoDAO;
+import projeto.oficina.DAO.MecanicoDAO;
 import projeto.oficina.carros.Carro;
+import projeto.oficina.documentos.Documento;
 import projeto.oficina.dono.Dono;
+import projeto.oficina.funcionario.Mecanico;
+
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
 
+        MecanicoDAO mDAO = new MecanicoDAO();
+
+        System.out.println("Bem vindo ao menu!");
+        System.out.println("Digite o seu nome: ");
+        String nomeAux = sc.nextLine();
+        System.out.println("Digite o seu CPF: ");
+        String cpfAux = sc.nextLine();
+
+        Mecanico m1 = new Mecanico(cpfAux, nomeAux);
+        mDAO.inserirMecanico(m1);
+
+        boolean flag = true;
+        int escolha1;
+
+        CarroDAO cDAO = new CarroDAO();
+        DocumentoDAO docDAO = new DocumentoDAO();
+        DonoDAO dDAO= new DonoDAO();
+
+        while(flag){
+            System.out.println("1 - Inserir um novo carro");
+            System.out.println("2 - Realizar uma busca");
+            System.out.println("3 - Remover um carro");
+            System.out.println("4 - Sair");
+            System.out.println("Digite a opção desejada:");
+            escolha1 = sc.nextInt();
+
+            switch (escolha1){
+                case 1:
+                    //CarroDAO cDAO = new CarroDAO();
+                    System.out.println("Insira o Número do Chassi do carro: ");
+                    int chassi = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Insira a cor do carro: ");
+                    String ano = sc.nextLine();
+                    System.out.println("Insira o modelo do carro: ");
+                    String modelo = sc.nextLine();
+
+                    //DocumentoDAO docDAO = new DocumentoDAO();
+                    System.out.println("Insira o renavam do carro: ");
+                    int renavamAux = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Insira o ano do veículo: ");
+                    int anoAux = sc.nextInt();
+                    sc.nextLine();
+                    Documento docAux = new Documento(renavamAux, anoAux);
+                    docDAO.inserirDocumento(docAux);
+
+                    //DonoDAO dDAO= new DonoDAO();
+                    System.out.println("Insira o nome do dono do carro: ");
+                    String nomeDonoAux = sc.nextLine();
+                    System.out.println("Insira o cpf do dono: ");
+                    String cpfDonoAux = sc.nextLine();
+
+                    Dono donoAux = new Dono(nomeDonoAux, cpfDonoAux);
+                    dDAO.inserirDono(donoAux);
+
+                    Carro carroAux = new Carro(chassi, ano, modelo, renavamAux, cpfDonoAux, m1.getCpf());
+                    cDAO.inserirCarro(carroAux);
+
+                    break;
+
+                case 2:
+                    int escolhaBusca;
+                    System.out.println("1 - Realizar uma busca geral (todos os dados de todos os carros)");
+                    System.out.println("2 - Realizar um busca personalizada (todos os dados de um carro específico)");
+                    System.out.println("Digite a sua escolha: ");
+                    escolhaBusca = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (escolhaBusca){
+                        case 1:
+                            cDAO.buscarCarrosSemFiltro();
+                            break;
+                        case 2:
+                            System.out.println("Digite o número do chassi do carro desejado: ");
+                            int buscaAux = sc.nextInt();
+                            sc.nextLine();
+                            cDAO.buscarCarroPorNumeroDoChassi(buscaAux);
+                            break;
+                        default:
+                            System.out.println("Opção Inválida!");
+                            break;
+                    }
+                    break;
+                case 3:
+                    System.out.println("Digite o número do chassi do carro desejado: ");
+                    int deleteAux = sc.nextInt();
+                    sc.nextLine();
+                    cDAO.deletarCarro(deleteAux);
+                    break;
+                case 4:
+                    System.out.println("Você saiu!");
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Opção Inválida!");
+                    break;
+            }
+
+
+
+
+        }
+
+        sc.close();
+        /*
         CarroDAO cDAO = new CarroDAO();
 
         Carro carro = new Carro(12345, "Preto", "Sport");
@@ -42,6 +155,7 @@ public class Main {
 
         //dDAO.deletarDono("566768");
 
+        */
 
     }
 }

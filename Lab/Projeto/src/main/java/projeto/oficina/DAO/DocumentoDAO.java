@@ -18,7 +18,7 @@ public class DocumentoDAO extends ConnectionDAO {
         try { //pst é um comando utilizado para a preparação do comando, usado quando se passa algo por parâmetro
             pst = con.prepareStatement(sql);
             pst.setInt(1, documento.getRenavam());
-            pst.setString(2, documento.getAnoDoVeiculo());
+            pst.setInt(2, documento.getAnoDoVeiculo());
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -41,7 +41,7 @@ public class DocumentoDAO extends ConnectionDAO {
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, documento.getAnoDoVeiculo());
+            pst.setInt(1, documento.getAnoDoVeiculo());
             pst.setInt(2, renavam);
             pst.execute();
             sucesso = true;
@@ -94,7 +94,7 @@ public class DocumentoDAO extends ConnectionDAO {
             rs = st.executeQuery(sql);
             System.out.println("Lista de Instrumentos: ");
             while (rs.next()) {
-                Documento documentoAux = new Documento(rs.getInt("renavam"), rs.getString("anoDoVeiculo"));
+                Documento documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
                 System.out.println("Renavam = " + documentoAux.getRenavam());
                 System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
                 System.out.println("--------------------------------");
@@ -128,7 +128,7 @@ public class DocumentoDAO extends ConnectionDAO {
                 {
                     sucesso = false;
                 } else {
-                    documentoAux = new Documento(rs.getInt("renavam"), rs.getString("anoDoVeiculo"));
+                    documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
                     System.out.println("Renavam = " + documentoAux.getRenavam());
                     System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
                     System.out.println("--------------------------------");
