@@ -4,10 +4,12 @@ public class Manutencao {
 
     private int id;
     private String status;
+    private String problema;
 
-    public Manutencao(int id, String status){
+    public Manutencao(int id, String status, String problema){
         this.id  = id;
         this.status = status;
+        this.problema = problema;
     }
 
     public int getId() {
@@ -24,5 +26,9 @@ public class Manutencao {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getProblema() {
+        return problema;
     }
 }

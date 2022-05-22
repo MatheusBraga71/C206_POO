@@ -1,5 +1,6 @@
 package projeto.oficina.DAO;
 
+import projeto.oficina.carros.Carro;
 import projeto.oficina.manutencao.Manutencao;
 
 import java.sql.SQLException;
@@ -13,12 +14,13 @@ public class ManutencaoDAO extends ConnectionDAO{
 
     public boolean inserirManutencao(Manutencao manutencao) {
         connectToDB();
-        String sql = "INSERT INTO Manutencao (id, status) values(?,?)";
+        String sql = "INSERT INTO Manutencao (idManutencao, status, problema) values(?,?,?)";
 
         try { //pst é um comando utilizado para a preparação do comando, usado quando se passa algo por parâmetro
             pst = con.prepareStatement(sql);
             pst.setInt(1, manutencao.getId());
             pst.setString(2, manutencao.getStatus());
+            pst.setString(3, manutencao.getProblema());
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -35,13 +37,13 @@ public class ManutencaoDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    public boolean atualizarManutencao(int id, Manutencao manutencao) {
+    public boolean atualizarManutencao(int id, String status) {
         connectToDB();
         String sql = "UPDATE Manutencao SET status=? where id=?";
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, manutencao.getStatus());
+            pst.setString(1, status);
             pst.setInt(2, id);
             pst.execute();
             sucesso = true;
@@ -94,9 +96,10 @@ public class ManutencaoDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Manutenção: ");
             while (rs.next()) {
-                Manutencao manutencaoAux = new Manutencao(rs.getInt("id"), rs.getString("status"));
-                System.out.println("id = " + manutencaoAux.getId());
-                System.out.println("Status = " + manutencaoAux.getStatus());
+                Manutencao manutencaoAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                System.out.println("id: " + manutencaoAux.getId());
+                System.out.println("Status: " + manutencaoAux.getStatus());
+                System.out.println("Problema: " + manutencaoAux.getProblema());
                 System.out.println("--------------------------------");
                 listaDeManutencao.add(manutencaoAux);
             }
@@ -117,7 +120,7 @@ public class ManutencaoDAO extends ConnectionDAO{
     public Manutencao buscarManutencaoPorId(int id) {
         connectToDB();
         Manutencao manutencaoAux = null;
-        String sql = "SELECT * FROM Manutencao WHERE id = ?";
+        String sql = "SELECT * FROM Manutencao INNER JOIN Carro_Has_Manutenção ON Manutencao.idManutencao = Carro_Has_Manutencao.Manutencao_idManutencao INNER JOIN Carro ON Carro.numeroChassi = Carro_Has_Manutencao.Carro_numeroChassi AND id = ?";
         try {
             pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -128,9 +131,14 @@ public class ManutencaoDAO extends ConnectionDAO{
                 {
                     sucesso = false;
                 } else {
-                    manutencaoAux = new Manutencao(rs.getInt("id"), rs.getString("status"));
-                    System.out.println("id = " + manutencaoAux.getId());
-                    System.out.println("Status = " + manutencaoAux.getStatus());
+                    manutencaoAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                    Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
+                    System.out.println("--------------------------------");
+                    System.out.println("id: " + manutencaoAux.getId());
+                    System.out.println("Status: " + manutencaoAux.getStatus());
+                    System.out.println("Problema: " + manutencaoAux.getProblema());
+                    System.out.println("Modelo do Carro: " + carroAux.getModelo());
+                    System.out.println("Numero do Chassi: " + carroAux.getNumeroChassi());
                     System.out.println("--------------------------------");
                 }
             }

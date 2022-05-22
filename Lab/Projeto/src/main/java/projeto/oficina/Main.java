@@ -1,13 +1,11 @@
 package projeto.oficina;
 
-import projeto.oficina.DAO.CarroDAO;
-import projeto.oficina.DAO.DocumentoDAO;
-import projeto.oficina.DAO.DonoDAO;
-import projeto.oficina.DAO.MecanicoDAO;
+import projeto.oficina.DAO.*;
 import projeto.oficina.carros.Carro;
 import projeto.oficina.documentos.Documento;
 import projeto.oficina.dono.Dono;
 import projeto.oficina.funcionario.Mecanico;
+import projeto.oficina.manutencao.Manutencao;
 
 import java.util.Scanner;
 
@@ -34,12 +32,15 @@ public class Main {
         CarroDAO cDAO = new CarroDAO();
         DocumentoDAO docDAO = new DocumentoDAO();
         DonoDAO dDAO= new DonoDAO();
+        ManutencaoDAO manDAO = new ManutencaoDAO();
+        CarroHasManutencaoDAO cmDAO = new CarroHasManutencaoDAO();
 
         while(flag){
             System.out.println("1 - Inserir um novo carro");
             System.out.println("2 - Realizar uma busca");
-            System.out.println("3 - Remover um carro");
-            System.out.println("4 - Sair");
+            System.out.println("3 - Inserir uma manutenção");
+            System.out.println("4 - Remover um carro");
+            System.out.println("5 - Sair");
             System.out.println("Digite a opção desejada:");
             escolha1 = sc.nextInt();
 
@@ -80,8 +81,12 @@ public class Main {
 
                 case 2:
                     int escolhaBusca;
+                    int buscaAux;
                     System.out.println("1 - Realizar uma busca geral (todos os dados de todos os carros)");
                     System.out.println("2 - Realizar um busca personalizada (todos os dados de um carro específico)");
+                    System.out.println("3 - Realizar a busca dos dados do dono de um carro");
+                    System.out.println("4 - Realizar a busca de todos os problemas");
+                    System.out.println("5 - Realizar a busca dos problemas de um carro específico");
                     System.out.println("Digite a sua escolha: ");
                     escolhaBusca = sc.nextInt();
                     sc.nextLine();
@@ -89,38 +94,73 @@ public class Main {
                     switch (escolhaBusca){
                         case 1:
                             cDAO.buscarCarrosSemFiltro();
+                            cmDAO.buscarManutencaoSemFiltro();
                             break;
                         case 2:
                             System.out.println("Digite o número do chassi do carro desejado: ");
-                            int buscaAux = sc.nextInt();
+                            buscaAux = sc.nextInt();
                             sc.nextLine();
                             cDAO.buscarCarroPorNumeroDoChassi(buscaAux);
+                            cmDAO.buscarManutencoesDoCarro(buscaAux);
+                            break;
+                        case 3:
+                            System.out.println("Digite o número do chassi do carro desejado: ");
+                            buscaAux = sc.nextInt();
+                            sc.nextLine();
+                            cDAO.buscarDadosDoDono(buscaAux);
+                            break;
+                        case 4:
+                            cmDAO.buscarManutencaoSemFiltro();
+                            break;
+                        case 5:
+                            System.out.println("Digite o numero do Chassi do carro desejado: ");
+                            int manChassi = sc.nextInt();
+                            sc.nextLine();
+
+                            cmDAO.buscarManutencoesDoCarro(manChassi);
                             break;
                         default:
                             System.out.println("Opção Inválida!");
                             break;
                     }
                     break;
+
                 case 3:
+                    System.out.println("Qual carro necessita de manutenção? (Insira o Número do Chassi)");
+                    int numChassiAux = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Insira o número da manutenção do carro: ");
+                    int idAux = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Insira o status da manutenção do carro: ");
+                    String statusAux = sc.nextLine();
+                    System.out.println("Insira o problema: ");
+                    String problemaAux = sc.nextLine();
+                    Manutencao manAux = new Manutencao(idAux, statusAux, problemaAux);
+                    manDAO.inserirManutencao(manAux);
+
+                    cmDAO.inserirManutencao(numChassiAux, manAux);
+
+                    break;
+
+                case 4:
                     System.out.println("Digite o número do chassi do carro desejado: ");
                     int deleteAux = sc.nextInt();
                     sc.nextLine();
                     cDAO.deletarCarro(deleteAux);
                     break;
-                case 4:
+
+                case 5:
                     System.out.println("Você saiu!");
                     flag = false;
                     break;
+
                 default:
                     System.out.println("Opção Inválida!");
                     break;
             }
 
-
-
-
         }
-
         sc.close();
         /*
         CarroDAO cDAO = new CarroDAO();

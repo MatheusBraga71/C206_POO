@@ -1,24 +1,26 @@
 package projeto.oficina.DAO;
 
-import projeto.oficina.documentos.Documento;
+import projeto.oficina.carros.Carro;
+import projeto.oficina.manutencao.Manutencao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DocumentoDAO extends ConnectionDAO {
+public class CarroHasManutencaoDAO extends ConnectionDAO{
 
-//DAO - Data Access Object
+    //DAO - Data Access Object
 
     boolean sucesso = false; //Para saber se funcionou
 
-    public boolean inserirDocumento(Documento documento) {
+    public boolean inserirManutencao(int numChassi, Manutencao manutencao) {
         connectToDB();
-        String sql = "INSERT INTO Documento (renavam, anoDoVeiculo) values(?,?)";
+
+        String sql = "INSERT INTO Carro_Has_Manutencao (Carro_numeroChassi, Manutencao_idManutencao) values(?,?)";
 
         try { //pst é um comando utilizado para a preparação do comando, usado quando se passa algo por parâmetro
             pst = con.prepareStatement(sql);
-            pst.setInt(1, documento.getRenavam());
-            pst.setInt(2, documento.getAnoDoVeiculo());
+            pst.setInt(1, numChassi);
+            pst.setInt(2, manutencao.getId());
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -35,14 +37,14 @@ public class DocumentoDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public boolean atualizarAnoDocumento(int renavam, Documento documento) {
+    public boolean atualizarStatusManutencao(int id, String status) {
         connectToDB();
-        String sql = "UPDATE Documento SET anoDoVeiculo=? where renavam=?";
+        String sql = "UPDATE Manutencao SET status=? where id=?";
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setInt(1, documento.getAnoDoVeiculo());
-            pst.setInt(2, renavam);
+            pst.setString(1, status);
+            pst.setInt(2, id);
             pst.execute();
             sucesso = true;
 
@@ -60,13 +62,13 @@ public class DocumentoDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public boolean deletarDocumento(int renavam) {
+    public boolean deletarManutencao(int id) {
         connectToDB();
-        String sql = "DELETE FROM Documento where renavam=?";
+        String sql = "DELETE FROM Manutencao where id=?";
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setInt(1, renavam);
+            pst.setInt(1, id);
             pst.execute();
             sucesso = true;
 
@@ -84,21 +86,26 @@ public class DocumentoDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public ArrayList<Documento> buscarDocumentoSemFiltro() {
-        ArrayList<Documento> listaDeDocumentos = new ArrayList<>();
+    public ArrayList<Manutencao> buscarManutencaoSemFiltro() {
+        ArrayList<Manutencao> listaDeManutencao = new ArrayList<>();
         connectToDB();
-        String sql = "SELECT * FROM Documento";
+        String sql = "SELECT * FROM Manutencao INNER JOIN Carro_Has_Manutencao ON Manutencao.idManutencao = Manutencao_idManutencao INNER JOIN Carro ON carro.numeroChassi = Carro_numeroChassi";
 
         try { //st é um comando usado quando a função não precisa de uma preparação, função não recebe parâmetro
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            System.out.println("Lista de Instrumentos: ");
+            System.out.println("Lista de Manutenções: ");
             while (rs.next()) {
-                Documento documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
-                System.out.println("Renavam = " + documentoAux.getRenavam());
-                System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
+                Manutencao manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
+                System.out.println("Modelo do carro: " + carroAux.getModelo());
+                System.out.println("Cor: " + carroAux.getCor());
+                System.out.println("Número do chassi do carro: " + carroAux.getNumeroChassi());
+                System.out.println("ID: " + manAux.getId());
+                System.out.println("Problema: " + manAux.getProblema());
+                System.out.println("Status: " + manAux.getStatus());
                 System.out.println("--------------------------------");
-                listaDeDocumentos.add(documentoAux);
+                listaDeManutencao.add(manAux);
             }
             sucesso = true;
         } catch(SQLException e) {
@@ -112,26 +119,26 @@ public class DocumentoDAO extends ConnectionDAO {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
-        return listaDeDocumentos;
+        return listaDeManutencao;
     }
-
-    public Documento buscarDocumentoPorRenavam(int renavam) {
+    public Manutencao buscarManutencoesDoCarro( int chassi) {
         connectToDB();
-        Documento documentoAux = null;
-        String sql = "SELECT * FROM Documento WHERE renavam = ?";
+        Manutencao manAux = null;
+        String sql = "SELECT * FROM Carro_Has_Manutencao INNER JOIN Manutencao ON Manutencao_idManutencao = Manutencao.idManutencao INNER JOIN Carro ON Carro_numeroChassi = Carro.numeroChassi and numeroChassi=?";
         try {
             pst = con.prepareStatement(sql);
-            pst.setInt(1, renavam);
+            pst.setInt(1, chassi);
             rs = pst.executeQuery();
+            System.out.println("Lista de Manutenção do carro: ");
             while (rs.next()) {
-                String aux = rs.getString("renavam");
+                String aux = rs.getString("numeroChassi");
                 if(aux.isEmpty())
                 {
                     sucesso = false;
                 } else {
-                    documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
-                    System.out.println("Renavam = " + documentoAux.getRenavam());
-                    System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
+                    manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                    System.out.println("Problema = " + manAux.getProblema());
+                    System.out.println("Status = " + manAux.getStatus());
                     System.out.println("--------------------------------");
                 }
             }
@@ -147,6 +154,6 @@ public class DocumentoDAO extends ConnectionDAO {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
-        return documentoAux;
+        return manAux;
     }
 }

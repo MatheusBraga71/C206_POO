@@ -1,6 +1,9 @@
 package projeto.oficina.carros;
 
 import projeto.oficina.DAO.DocumentoDAO;
+import projeto.oficina.manutencao.Manutencao;
+
+import java.util.ArrayList;
 
 public class Carro {
 
@@ -10,6 +13,7 @@ public class Carro {
     private int Documento_renavam;
     private String Dono_cpf;
     private String Mecanico_cpf;
+    private ArrayList<Manutencao> idManutencao = new ArrayList<Manutencao>();
 
     public Carro(int numeroChassi, String cor, String modelo,int Documento_renavam, String Dono_cpf, String Mecanico_cpf){
         this.numeroChassi = numeroChassi;
@@ -18,6 +22,10 @@ public class Carro {
         this.Documento_renavam = Documento_renavam;
         this.Dono_cpf = Dono_cpf;
         this.Mecanico_cpf = Mecanico_cpf;
+    }
+
+    public void addManutencao(Manutencao manutencao){
+        idManutencao.add(manutencao);
     }
 
     public int getNumeroChassi() {
