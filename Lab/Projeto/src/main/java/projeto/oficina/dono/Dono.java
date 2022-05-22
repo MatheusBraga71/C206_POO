@@ -15,18 +15,7 @@ public class Dono {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getCpf() {
         return cpf;
     }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 }
-
-
-//select dono.nome from Carro inner join Dono on fk_Carro_Dono1 = dono.cpf;

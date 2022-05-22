@@ -14,13 +14,13 @@ public class ManutencaoDAO extends ConnectionDAO{
 
     public boolean inserirManutencao(Manutencao manutencao) {
         connectToDB();
-        String sql = "INSERT INTO Manutencao (idManutencao, status, problema) values(?,?,?)";
+        String sql = "INSERT INTO Manutencao (problema, status) values(?,?)";
 
         try { //pst é um comando utilizado para a preparação do comando, usado quando se passa algo por parâmetro
             pst = con.prepareStatement(sql);
-            pst.setInt(1, manutencao.getId());
+            //pst.setInt(1, manutencao.getId());
+            pst.setString(1, manutencao.getProblema());
             pst.setString(2, manutencao.getStatus());
-            pst.setString(3, manutencao.getProblema());
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -96,7 +96,7 @@ public class ManutencaoDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Manutenção: ");
             while (rs.next()) {
-                Manutencao manutencaoAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                Manutencao manutencaoAux = new Manutencao(rs.getInt("idManutencao"),rs.getString("status"), rs.getString("problema"));
                 System.out.println("id: " + manutencaoAux.getId());
                 System.out.println("Status: " + manutencaoAux.getStatus());
                 System.out.println("Problema: " + manutencaoAux.getProblema());
@@ -131,7 +131,7 @@ public class ManutencaoDAO extends ConnectionDAO{
                 {
                     sucesso = false;
                 } else {
-                    manutencaoAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                    manutencaoAux = new Manutencao(rs.getInt("idManutencao"),rs.getString("status"), rs.getString("problema"));
                     Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
                     System.out.println("--------------------------------");
                     System.out.println("id: " + manutencaoAux.getId());

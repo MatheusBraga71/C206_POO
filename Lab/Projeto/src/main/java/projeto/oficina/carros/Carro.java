@@ -13,7 +13,6 @@ public class Carro {
     private int Documento_renavam;
     private String Dono_cpf;
     private String Mecanico_cpf;
-    private ArrayList<Manutencao> idManutencao = new ArrayList<Manutencao>();
 
     public Carro(int numeroChassi, String cor, String modelo,int Documento_renavam, String Dono_cpf, String Mecanico_cpf){
         this.numeroChassi = numeroChassi;
@@ -24,56 +23,29 @@ public class Carro {
         this.Mecanico_cpf = Mecanico_cpf;
     }
 
-    public void addManutencao(Manutencao manutencao){
-        idManutencao.add(manutencao);
-    }
-
     public int getNumeroChassi() {
         return numeroChassi;
-    }
-
-    public void setNumeroChassi(int numeroChassi) {
-        this.numeroChassi = numeroChassi;
     }
 
     public String getCor() {
         return cor;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
     public String getModelo() {
         return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public int getDocumento_renavam() {
         return Documento_renavam;
     }
 
-    public void setDocumento_renavam(int documento_renavam) {
-        Documento_renavam = documento_renavam;
-    }
-
     public String getDono_cpf() {
         return Dono_cpf;
-    }
-
-    public void setDono_cpf(String dono_cpf) {
-        Dono_cpf = dono_cpf;
     }
 
     public String getMecanico_cpf() {
         return Mecanico_cpf;
     }
 
-    public void setMecanico_cpf(String mecanico_cpf) {
-        Mecanico_cpf = mecanico_cpf;
-    }
 }
 

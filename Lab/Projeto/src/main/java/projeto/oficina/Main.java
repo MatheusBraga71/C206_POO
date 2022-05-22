@@ -13,9 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); // Variável para inicialização do Scanner
 
-        MecanicoDAO mDAO = new MecanicoDAO();
+        MecanicoDAO mDAO = new MecanicoDAO(); // Instanciação de um objeto mecânico
 
         System.out.println("Bem vindo ao menu!");
         System.out.println("Digite o seu nome: ");
@@ -27,7 +27,7 @@ public class Main {
         mDAO.inserirMecanico(m1);
 
         boolean flag = true;
-        int escolha1;
+        int contador = 0; // variável auxiliar para a contagem de manutenções (id auto_increment)
 
         CarroDAO cDAO = new CarroDAO();
         DocumentoDAO docDAO = new DocumentoDAO();
@@ -36,11 +36,14 @@ public class Main {
         CarroHasManutencaoDAO cmDAO = new CarroHasManutencaoDAO();
 
         while(flag){
+            int escolha1;
             System.out.println("1 - Inserir um novo carro");
             System.out.println("2 - Realizar uma busca");
             System.out.println("3 - Inserir uma manutenção");
             System.out.println("4 - Remover um carro");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Atualizar um dado");
+            System.out.println("6 - Realizar teste");
+            System.out.println("7 - Sair");
             System.out.println("Digite a opção desejada:");
             escolha1 = sc.nextInt();
 
@@ -126,19 +129,25 @@ public class Main {
                     break;
 
                 case 3:
+
                     System.out.println("Qual carro necessita de manutenção? (Insira o Número do Chassi)");
                     int numChassiAux = sc.nextInt();
                     sc.nextLine();
+                    /*
                     System.out.println("Insira o número da manutenção do carro: ");
                     int idAux = sc.nextInt();
                     sc.nextLine();
-                    System.out.println("Insira o status da manutenção do carro: ");
-                    String statusAux = sc.nextLine();
+                    */
                     System.out.println("Insira o problema: ");
                     String problemaAux = sc.nextLine();
-                    Manutencao manAux = new Manutencao(idAux, statusAux, problemaAux);
+                    System.out.println("Insira o status da manutenção do carro: ");
+                    String statusAux = sc.nextLine();
+                    contador++;
+
+                    Manutencao manAux = new Manutencao(contador, statusAux, problemaAux);
                     manDAO.inserirManutencao(manAux);
 
+                    System.out.println(manAux.getId());
                     cmDAO.inserirManutencao(numChassiAux, manAux);
 
                     break;
@@ -151,6 +160,71 @@ public class Main {
                     break;
 
                 case 5:
+
+                    break;
+
+                case 6:
+                    int escolhaTeste;
+                    /*
+                    System.out.println("Qual teste deseja realizar?");
+                    System.out.println("1 - Motor");
+                    System.out.println("2 - Luzes");
+                    System.out.println("3 - Freios");
+                    escolhaTeste = sc.nextInt();
+                    sc.nextLine();
+
+                     */
+
+                    System.out.println("Em qual carro será feito o teste? (Insira o número do chassi)");
+                    int chassiTeste = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println("Qual o Id da manutenção testada?");
+                    int idTeste = sc.nextInt();
+                    sc.nextLine();
+
+                    Carro aux = cDAO.buscaChassiTeste(chassiTeste);
+
+                    m1.verificaProblema(aux);
+
+                    System.out.println("O problema foi solucionado? (sim = 1 | nao = 2)");
+                    escolhaTeste = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (escolhaTeste){
+                        case 1:
+                            cmDAO.atualizarStatusManutencao(idTeste, "Concluído!");
+                            break;
+
+                        case 2:
+                            cmDAO.atualizarStatusManutencao(idTeste, "Verificar novamente!");
+                            break;
+
+                        default:
+                            System.out.println("Opção Inválida!");
+                            break;
+                    /*
+                    switch (escolhaTeste){
+                        case 1:
+                            m1.verificaMotor(aux);
+                            break;
+                        case 2:
+                            m1.verificaLuzes(aux);
+                            break;
+
+                        case 3:
+                            m1.verificaFreios(aux);
+                            break;
+
+                        default:
+                            System.out.println("Opção Inválida!");
+                            break;
+
+                     */
+                    }
+                    break;
+
+                case 7:
                     System.out.println("Você saiu!");
                     flag = false;
                     break;
@@ -162,40 +236,5 @@ public class Main {
 
         }
         sc.close();
-        /*
-        CarroDAO cDAO = new CarroDAO();
-
-        Carro carro = new Carro(12345, "Preto", "Sport");
-
-        DonoDAO dDAO = new DonoDAO();
-
-        Dono d1 = new Dono();
-        d1.setCpf("123456");
-        d1.setNome("João");
-
-        Dono d2 = new Dono();
-        d2.setCpf("12");
-        d2.setNome("45");
-
-        cDAO.buscarCarrosSemFiltro();
-
-
-
-        //carro.setDono_cpf(d1.getCpf());
-
-        //dDAO.inserirDono(d1);
-
-
-        //cDAO.inserirCarro(carro);
-
-
-        //dDAO.buscarDonoPorCPF("3");
-
-        //dDAO.atualizarDono("123456",d2);
-
-        //dDAO.deletarDono("566768");
-
-        */
-
     }
 }

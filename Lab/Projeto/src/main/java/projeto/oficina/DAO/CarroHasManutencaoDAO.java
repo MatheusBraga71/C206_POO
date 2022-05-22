@@ -39,12 +39,13 @@ public class CarroHasManutencaoDAO extends ConnectionDAO{
 
     public boolean atualizarStatusManutencao(int id, String status) {
         connectToDB();
-        String sql = "UPDATE Manutencao SET status=? where id=?";
+        String sql = "UPDATE Manutencao SET status=? where idManutencao=?";
 
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, status);
             pst.setInt(2, id);
+            //pst.setInt(3, numChassi);
             pst.execute();
             sucesso = true;
 
@@ -96,7 +97,7 @@ public class CarroHasManutencaoDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Manutenções: ");
             while (rs.next()) {
-                Manutencao manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                Manutencao manAux = new Manutencao(rs.getInt("idManutencao"),rs.getString("status"), rs.getString("problema"));
                 Carro carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
                 System.out.println("Modelo do carro: " + carroAux.getModelo());
                 System.out.println("Cor: " + carroAux.getCor());
@@ -136,7 +137,7 @@ public class CarroHasManutencaoDAO extends ConnectionDAO{
                 {
                     sucesso = false;
                 } else {
-                    manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
+                    manAux = new Manutencao(rs.getInt("idManutencao"),rs.getString("status"), rs.getString("problema"));
                     System.out.println("Problema = " + manAux.getProblema());
                     System.out.println("Status = " + manAux.getStatus());
                     System.out.println("--------------------------------");

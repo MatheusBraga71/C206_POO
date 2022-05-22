@@ -14,15 +14,7 @@ public class Documento {
         return renavam;
     }
 
-    public void setRenavam(int renavam) {
-        this.renavam = renavam;
-    }
-
     public int getAnoDoVeiculo() {
         return anoDoVeiculo;
-    }
-
-    public void setAnoDoVeiculo(int anoDoVeiculo) {
-        this.anoDoVeiculo = anoDoVeiculo;
     }
 }

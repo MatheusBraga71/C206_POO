@@ -269,6 +269,36 @@ public class CarroDAO extends ConnectionDAO{
         return donoAux;
     }
 
-
+    public Carro buscaChassiTeste(int numeroChassi) {
+        connectToDB();
+        Carro carroAux = null;
+        String sql = "SELECT * FROM Carro WHERE numeroChassi = ?";
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, numeroChassi);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String aux = rs.getString("numeroChassi");
+                if(aux.isEmpty())
+                {
+                    sucesso = false;
+                } else {
+                    carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
+                }
+            }
+            sucesso = true;
+        } catch(SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch(SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+        return carroAux;
+    }
 
 }
