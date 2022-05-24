@@ -160,7 +160,83 @@ public class Main {
                     break;
 
                 case 5:
+                    int escolhaAtualizacao;
+                    System.out.println("1 - Atualizar Modelo de um carro");
+                    System.out.println("2 - Atualizar Cor de um carro");
+                    System.out.println("3 - Atualizar Nome do Dono do carro");
+                    System.out.println("4 - Atualizar CPF do Dono do carro (Para correção de entrada errada)");
+                    System.out.println("5 - Atualizar nome do Mecânico");
+                    System.out.println("Digite a sua escolha: ");
+                    escolhaAtualizacao = sc.nextInt();
+                    sc.nextLine();
+                    int attCarroAux; // Variável auxiliar para a atualizar dados do carro
+                    String attCpfAux; // Variável auxiliar para a atualizar dados do Dono
+                    String attMecanicoAux; // Variável auxiliar para atualizar nome do Mecânico
 
+                    switch(escolhaAtualizacao){
+                        case 1:
+                            System.out.println("Insira o número do Chassi do carro desejado: ");
+                            attCarroAux = sc.nextInt();
+                            sc.nextLine();
+
+                            System.out.println("Para qual modelo será alterado?");
+                            String modeloAux = sc.nextLine();
+
+                            cDAO.atualizarModeloCarro(attCarroAux, modeloAux);
+
+                            break;
+
+                        case 2:
+                            System.out.println("Insira o número do Chassi do carro desejado: ");
+                            attCarroAux = sc.nextInt();
+                            sc.nextLine();
+
+                            System.out.println("Para qual cor será alterado?");
+                            String corAux = sc.nextLine();
+
+                            cDAO.atualizarCorCarro(attCarroAux, corAux);
+
+                            break;
+
+                        case 3:
+                            System.out.println("Insira o cpf do Dono: ");
+                            attCpfAux = sc.nextLine();
+
+                            System.out.println("Para qual nome será alterado? ");
+                            String attNomeAux = sc.nextLine();
+
+                            dDAO.atualizarNomeDono(attCpfAux, attNomeAux);
+
+                            break;
+
+                        case 4:
+                            System.out.println("Insira o cpf do Dono: ");
+                            attCpfAux = sc.nextLine();
+
+                            System.out.println("Para qual cpf será alterado? ");
+                            String nCPF = sc.nextLine(); // Novo CPF a ser inserido
+
+                            dDAO.atualizarNomeDono(attCpfAux, nCPF);
+
+                            break;
+
+                        case 5:
+                            System.out.println("Insira o CPF do Mecânico");
+                            attMecanicoAux = sc.nextLine();
+
+                            System.out.println("Para qual nome será alterado? ");
+                            String nomeMecAux = sc.nextLine();
+
+                            mDAO.atualizarNomeMecanico(attMecanicoAux, nomeMecAux);
+
+                            break;
+
+                        default:
+                            System.out.println("Opção Inválida!");
+                            break;
+
+
+                    }
                     break;
 
                 case 6:

@@ -96,7 +96,7 @@ public class CarroDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    public boolean atualizarModeloCarro(int numeroChassi, String modelo) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
+    public boolean atualizarModeloCarro(int numeroChassi, String modelo) {
         connectToDB();
         String sql = "UPDATE Carro SET modelo=? where numeroChassi=?";
 

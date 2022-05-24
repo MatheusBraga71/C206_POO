@@ -35,13 +35,13 @@ public class MecanicoDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    public boolean atualizarMecanico(String cpf, Mecanico mecanico) {
+    public boolean atualizarNomeMecanico(String cpf, String nome) {
         connectToDB();
         String sql = "UPDATE Mecanico SET nome=? where cpf=?";
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, mecanico.getNome());
+            pst.setString(1, nome);
             pst.setString(2, cpf);
             pst.execute();
             sucesso = true;
