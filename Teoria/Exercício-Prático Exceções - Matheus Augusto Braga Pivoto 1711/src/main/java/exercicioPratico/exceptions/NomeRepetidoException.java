@@ -1,9 +1,9 @@
 package exercicioPratico.exceptions;
 
 // Exceção do tipo checked
-public class NomeRepetidoException extends Throwable {
+public class NomeRepetidoException extends Exception {
 
     public NomeRepetidoException(){
-        super("Nome já cadastrado!");
+        System.out.println("Esse nome já foi usado");
     }
 }
