@@ -1,6 +1,7 @@
 package projeto.oficina.DAO;
 
 import projeto.oficina.carros.Carro;
+import projeto.oficina.documentos.Documento;
 import projeto.oficina.dono.Dono;
 import projeto.oficina.funcionario.Mecanico;
 import projeto.oficina.manutencao.Manutencao;
@@ -41,6 +42,8 @@ public class CarroDAO extends ConnectionDAO{
         }
         return sucesso;
     }
+
+
 
     /*
     public boolean atualizarCarro(int numeroChassi, Carro carro) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
@@ -159,12 +162,12 @@ public class CarroDAO extends ConnectionDAO{
                 //Manutencao manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
                 Dono donoAux = new Dono(rs.getString("dono.nome"), rs.getString("cpf"));
                 Mecanico mecanicoAux = new Mecanico(rs.getString("cpf"), rs.getString("mecanico.nome"));
-                System.out.println("Modelo = " + carroAux.getModelo());
-                System.out.println("Cor = " + carroAux.getCor());
-                System.out.println("Numero do Chassi = " + carroAux.getNumeroChassi());
+                System.out.println("Modelo: " + carroAux.getModelo());
+                System.out.println("Cor: " + carroAux.getCor());
+                System.out.println("Numero do Chassi: " + carroAux.getNumeroChassi());
                 System.out.println("Renavam do carro: " + carroAux.getDocumento_renavam());
                 System.out.println("Nome do dono: " + donoAux.getNome());
-                System.out.println("CPF do Dono = " + carroAux.getDono_cpf());
+                System.out.println("CPF do Dono: " + carroAux.getDono_cpf());
                 System.out.println("Nome do Mecânico responsável: " + mecanicoAux.getNome());
                 System.out.println("CPF do Mecânico Responsável: " + carroAux.getMecanico_cpf());
                 System.out.println("--------------------------------");
@@ -205,12 +208,12 @@ public class CarroDAO extends ConnectionDAO{
                     //Manutencao manAux = new Manutencao(rs.getInt("idManutencao"), rs.getString("status"), rs.getString("problema"));
 
                     System.out.println("--------------------------------");
-                    System.out.println("Modelo = " + carroAux.getModelo());
-                    System.out.println("Cor = " + carroAux.getCor());
-                    System.out.println("Numero do Chassi = " + carroAux.getNumeroChassi());
+                    System.out.println("Modelo: " + carroAux.getModelo());
+                    System.out.println("Cor: " + carroAux.getCor());
+                    System.out.println("Numero do Chassi: " + carroAux.getNumeroChassi());
                     System.out.println("Renavam do carro: " + carroAux.getDocumento_renavam());
                     System.out.println("Nome do dono: " + donoAux.getNome());
-                    System.out.println("CPF do Dono = " + carroAux.getDono_cpf());
+                    System.out.println("CPF do Dono: " + carroAux.getDono_cpf());
                     System.out.println("Nome do Mecânico Responsável: " + mecanicoAux.getNome());
                     System.out.println("CPF do Mecanico Responsável: " + carroAux.getMecanico_cpf());
                     //System.out.println("Problema do Carro: " + manAux.getProblema());
@@ -249,8 +252,8 @@ public class CarroDAO extends ConnectionDAO{
                 } else {
                     donoAux = new Dono(rs.getString("nome"), rs.getString("cpf"));
                     System.out.println("--------------------------------");
-                    System.out.println("Nome = " + donoAux.getNome());
-                    System.out.println("CPF = " + donoAux.getCpf());
+                    System.out.println("Nome: " + donoAux.getNome());
+                    System.out.println("CPF: " + donoAux.getCpf());
                     System.out.println("--------------------------------");
                 }
             }
@@ -300,5 +303,6 @@ public class CarroDAO extends ConnectionDAO{
         }
         return carroAux;
     }
+
 
 }

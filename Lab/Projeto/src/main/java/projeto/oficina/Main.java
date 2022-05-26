@@ -54,7 +54,7 @@ public class Main {
                     int chassi = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Insira a cor do carro: ");
-                    String ano = sc.nextLine();
+                    String cor = sc.nextLine();
                     System.out.println("Insira o modelo do carro: ");
                     String modelo = sc.nextLine();
 
@@ -68,17 +68,41 @@ public class Main {
                     Documento docAux = new Documento(renavamAux, anoAux);
                     docDAO.inserirDocumento(docAux);
 
-                    //DonoDAO dDAO= new DonoDAO();
-                    System.out.println("Insira o nome do dono do carro: ");
-                    String nomeDonoAux = sc.nextLine();
-                    System.out.println("Insira o cpf do dono: ");
-                    String cpfDonoAux = sc.nextLine();
 
-                    Dono donoAux = new Dono(nomeDonoAux, cpfDonoAux);
-                    dDAO.inserirDono(donoAux);
+                    System.out.println("Novo dono? sim = 1 | nao = 2");
+                    int escolhaDono = sc.nextInt();
+                    sc.nextLine();
 
-                    Carro carroAux = new Carro(chassi, ano, modelo, renavamAux, cpfDonoAux, m1.getCpf());
-                    cDAO.inserirCarro(carroAux);
+                    switch (escolhaDono){
+                        case 1:
+                            //DonoDAO dDAO= new DonoDAO();
+                            System.out.println("Insira o nome do dono do carro: ");
+                            String nomeNovoDonoAux = sc.nextLine();
+                            System.out.println("Insira o cpf do dono: ");
+                            String cpfNovoDonoAux = sc.nextLine();
+
+                            Dono donoAux = new Dono(nomeNovoDonoAux, cpfNovoDonoAux);
+                            dDAO.inserirDono(donoAux);
+
+                            Carro carroAux = new Carro(chassi, cor, modelo, renavamAux, cpfNovoDonoAux, m1.getCpf());
+
+                            cDAO.inserirCarro(carroAux);
+
+                            break;
+
+                        case 2:
+                            System.out.println("Insira o cpf do dono: ");
+                            String cpfDonoAux = sc.nextLine();
+
+                            Carro carroAux2 = new Carro(chassi, cor, modelo, renavamAux, cpfDonoAux, m1.getCpf());
+                            cDAO.inserirCarro(carroAux2);
+
+                            break;
+
+                        default:
+                            System.out.println("Opção Inválida!");
+                            break;
+                    }
 
                     break;
 
@@ -86,7 +110,7 @@ public class Main {
                     int escolhaBusca;
                     int buscaAux;
                     System.out.println("1 - Realizar uma busca geral (todos os dados de todos os carros)");
-                    System.out.println("2 - Realizar um busca personalizada (todos os dados de um carro específico)");
+                    System.out.println("2 - Realizar uma busca personalizada (todos os dados de um carro específico)");
                     System.out.println("3 - Realizar a busca dos dados do dono de um carro");
                     System.out.println("4 - Realizar a busca de todos os problemas");
                     System.out.println("5 - Realizar a busca dos problemas de um carro específico");
@@ -133,11 +157,7 @@ public class Main {
                     System.out.println("Qual carro necessita de manutenção? (Insira o Número do Chassi)");
                     int numChassiAux = sc.nextInt();
                     sc.nextLine();
-                    /*
-                    System.out.println("Insira o número da manutenção do carro: ");
-                    int idAux = sc.nextInt();
-                    sc.nextLine();
-                    */
+
                     System.out.println("Insira o problema: ");
                     String problemaAux = sc.nextLine();
                     System.out.println("Insira o status da manutenção do carro: ");
@@ -156,7 +176,14 @@ public class Main {
                     System.out.println("Digite o número do chassi do carro desejado: ");
                     int deleteAux = sc.nextInt();
                     sc.nextLine();
+
+                    System.out.println("Digite o renavam do carro desejado: ");
+                    int docDeleteAux = sc.nextInt();
+                    sc.nextLine();
+
+                    docDAO.deletarDocumento(docDeleteAux);
                     cDAO.deletarCarro(deleteAux);
+
                     break;
 
                 case 5:

@@ -95,8 +95,8 @@ public class MecanicoDAO extends ConnectionDAO{
             System.out.println("Lista de Mecanicos: ");
             while (rs.next()) {
                 Mecanico mecanicoAux = new Mecanico(rs.getString("cpf"), rs.getString("nome"));
-                System.out.println("CPF = " + mecanicoAux.getCpf());
-                System.out.println("Nome = " + mecanicoAux.getNome());
+                System.out.println("CPF: " + mecanicoAux.getCpf());
+                System.out.println("Nome: " + mecanicoAux.getNome());
                 System.out.println("--------------------------------");
                 listaDeMecanicos.add(mecanicoAux);
             }
@@ -129,8 +129,8 @@ public class MecanicoDAO extends ConnectionDAO{
                     sucesso = false;
                 } else {
                     mecanicoAux = new Mecanico(rs.getString("cpf"), rs.getString("nome"));
-                    System.out.println("CPF = " + mecanicoAux.getCpf());
-                    System.out.println("Nome = " + mecanicoAux.getNome());
+                    System.out.println("CPF: " + mecanicoAux.getCpf());
+                    System.out.println("Nome: " + mecanicoAux.getNome());
                     System.out.println("--------------------------------");
                 }
             }

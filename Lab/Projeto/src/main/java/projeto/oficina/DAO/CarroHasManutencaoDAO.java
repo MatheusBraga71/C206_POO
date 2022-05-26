@@ -138,8 +138,8 @@ public class CarroHasManutencaoDAO extends ConnectionDAO{
                     sucesso = false;
                 } else {
                     manAux = new Manutencao(rs.getInt("idManutencao"),rs.getString("status"), rs.getString("problema"));
-                    System.out.println("Problema = " + manAux.getProblema());
-                    System.out.println("Status = " + manAux.getStatus());
+                    System.out.println("Problema: " + manAux.getProblema());
+                    System.out.println("Status: " + manAux.getStatus());
                     System.out.println("--------------------------------");
                 }
             }
