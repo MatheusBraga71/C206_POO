@@ -24,7 +24,12 @@ public class Main {
         String cpfAux = sc.nextLine();
 
         Mecanico m1 = new Mecanico(cpfAux, nomeAux);
-        mDAO.inserirMecanico(m1);
+
+        if(mDAO.buscaMecanicoExistente(cpfAux) == true){
+            System.out.println("Bem vindo de volta!");
+        } else{
+            mDAO.inserirMecanico(m1);
+        }
 
         boolean flag = true;
         int contador = 0; // variável auxiliar para a contagem de manutenções (id auto_increment)
@@ -66,7 +71,7 @@ public class Main {
                     int anoAux = sc.nextInt();
                     sc.nextLine();
                     Documento docAux = new Documento(renavamAux, anoAux);
-                    docDAO.inserirDocumento(docAux);
+                    //docDAO.inserirDocumento(docAux);
 
 
                     System.out.println("Novo dono? sim = 1 | nao = 2");
@@ -86,7 +91,9 @@ public class Main {
 
                             Carro carroAux = new Carro(chassi, cor, modelo, renavamAux, cpfNovoDonoAux, m1.getCpf());
 
+                            docDAO.inserirDocumento(docAux);
                             cDAO.inserirCarro(carroAux);
+
 
                             break;
 
@@ -95,6 +102,8 @@ public class Main {
                             String cpfDonoAux = sc.nextLine();
 
                             Carro carroAux2 = new Carro(chassi, cor, modelo, renavamAux, cpfDonoAux, m1.getCpf());
+
+                            docDAO.inserirDocumento(docAux);
                             cDAO.inserirCarro(carroAux2);
 
                             break;

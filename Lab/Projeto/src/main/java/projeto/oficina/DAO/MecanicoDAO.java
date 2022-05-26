@@ -117,7 +117,7 @@ public class MecanicoDAO extends ConnectionDAO{
     public Mecanico buscarMecanicoPorCpf(String cpf) {
         connectToDB();
         Mecanico mecanicoAux = null;
-        String sql = "SELECT * FROM instrumentos WHERE cpf = ?";
+        String sql = "SELECT * FROM Mecanico WHERE cpf = ?";
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, cpf);
@@ -147,5 +147,39 @@ public class MecanicoDAO extends ConnectionDAO{
             }
         }
         return mecanicoAux;
+    }
+
+    public boolean buscaMecanicoExistente(String cpf) {
+        connectToDB();
+        boolean found = false;
+        String sql = "SELECT * FROM Mecanico WHERE cpf = ?";
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, cpf);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String aux = rs.getString("cpf");
+                if(aux.isEmpty())
+                {
+                    sucesso = false;
+                    found = false;
+                }
+                else{
+                    found = true;
+                }
+            }
+            sucesso = true;
+        } catch(SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch(SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+        return found;
     }
 }
