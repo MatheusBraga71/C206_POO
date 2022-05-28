@@ -63,30 +63,6 @@ public class CarroHasManutencaoDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    public boolean deletarManutencao(int id) {
-        connectToDB();
-        String sql = "DELETE FROM Manutencao where id=?";
-
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.execute();
-            sucesso = true;
-
-        } catch(SQLException ex) {
-            System.out.println("Erro = " +  ex.getMessage());
-            sucesso = false;
-        } finally {
-            try {
-                con.close();
-                pst.close();
-            } catch(SQLException exc) {
-                System.out.println("Erro: " + exc.getMessage());
-            }
-        }
-        return sucesso;
-    }
-
     public ArrayList<Manutencao> buscarManutencaoSemFiltro() {
         ArrayList<Manutencao> listaDeManutencao = new ArrayList<>();
         connectToDB();

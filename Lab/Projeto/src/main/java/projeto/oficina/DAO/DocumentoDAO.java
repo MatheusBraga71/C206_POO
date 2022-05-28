@@ -3,7 +3,6 @@ package projeto.oficina.DAO;
 import projeto.oficina.documentos.Documento;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DocumentoDAO extends ConnectionDAO {
 
@@ -23,31 +22,6 @@ public class DocumentoDAO extends ConnectionDAO {
             sucesso = true;
         } catch(SQLException exc) {
             System.out.println("Erro: " + exc.getMessage());
-            sucesso = false;
-        } finally {
-            try {
-                con.close();
-                pst.close();
-            } catch(SQLException exc) {
-                System.out.println("Erro: " + exc.getMessage());
-            }
-        }
-        return sucesso;
-    }
-
-    public boolean atualizarAnoDocumento(int renavam, Documento documento) {
-        connectToDB();
-        String sql = "UPDATE Documento SET anoDoVeiculo=? where renavam=?";
-
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, documento.getAnoDoVeiculo());
-            pst.setInt(2, renavam);
-            pst.execute();
-            sucesso = true;
-
-        } catch(SQLException ex) {
-            System.out.println("Erro = " +  ex.getMessage());
             sucesso = false;
         } finally {
             try {
@@ -84,40 +58,9 @@ public class DocumentoDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public ArrayList<Documento> buscarDocumentoSemFiltro() {
-        ArrayList<Documento> listaDeDocumentos = new ArrayList<>();
+    public boolean buscaDocExistente(int renavam) {
         connectToDB();
-        String sql = "SELECT * FROM Documento";
-
-        try { //st é um comando usado quando a função não precisa de uma preparação, função não recebe parâmetro
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            System.out.println("Lista de Instrumentos: ");
-            while (rs.next()) {
-                Documento documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
-                System.out.println("Renavam = " + documentoAux.getRenavam());
-                System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
-                System.out.println("--------------------------------");
-                listaDeDocumentos.add(documentoAux);
-            }
-            sucesso = true;
-        } catch(SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-            sucesso = false;
-        } finally {
-            try {
-                con.close();
-                st.close();
-            } catch(SQLException e) {
-                System.out.println("Erro: " + e.getMessage());
-            }
-        }
-        return listaDeDocumentos;
-    }
-
-    public Documento buscarDocumentoPorRenavam(int renavam) {
-        connectToDB();
-        Documento documentoAux = null;
+        boolean found = false;
         String sql = "SELECT * FROM Documento WHERE renavam = ?";
         try {
             pst = con.prepareStatement(sql);
@@ -128,11 +71,10 @@ public class DocumentoDAO extends ConnectionDAO {
                 if(aux.isEmpty())
                 {
                     sucesso = false;
-                } else {
-                    documentoAux = new Documento(rs.getInt("renavam"), rs.getInt("anoDoVeiculo"));
-                    System.out.println("Renavam = " + documentoAux.getRenavam());
-                    System.out.println("Ano do Veículo = " + documentoAux.getAnoDoVeiculo());
-                    System.out.println("--------------------------------");
+                    found = false;
+                }
+                else{
+                    found = true;
                 }
             }
             sucesso = true;
@@ -147,6 +89,6 @@ public class DocumentoDAO extends ConnectionDAO {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
-        return documentoAux;
+        return found;
     }
 }

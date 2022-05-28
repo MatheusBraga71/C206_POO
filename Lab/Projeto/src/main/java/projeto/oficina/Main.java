@@ -17,7 +17,7 @@ public class Main {
 
         MecanicoDAO mDAO = new MecanicoDAO(); // Instanciação de um objeto mecânico
 
-        System.out.println("Bem vindo ao menu!");
+        System.out.println("Bem vindo ao menu! ");
         System.out.println("Digite o seu nome: ");
         String nomeAux = sc.nextLine();
         System.out.println("Digite o seu CPF: ");
@@ -26,7 +26,7 @@ public class Main {
         Mecanico m1 = new Mecanico(cpfAux, nomeAux);
 
         if(mDAO.buscaMecanicoExistente(cpfAux) == true){
-            System.out.println("Bem vindo de volta!");
+            System.out.println("Bem vindo de volta! ");
         } else{
             mDAO.inserirMecanico(m1);
         }
@@ -71,8 +71,6 @@ public class Main {
                     int anoAux = sc.nextInt();
                     sc.nextLine();
                     Documento docAux = new Documento(renavamAux, anoAux);
-                    //docDAO.inserirDocumento(docAux);
-
 
                     System.out.println("Novo dono? sim = 1 | nao = 2");
                     int escolhaDono = sc.nextInt();
@@ -91,9 +89,12 @@ public class Main {
 
                             Carro carroAux = new Carro(chassi, cor, modelo, renavamAux, cpfNovoDonoAux, m1.getCpf());
 
-                            docDAO.inserirDocumento(docAux);
-                            cDAO.inserirCarro(carroAux);
-
+                            if(docDAO.buscaDocExistente(renavamAux) == false) {
+                                docDAO.inserirDocumento(docAux);
+                                cDAO.inserirCarro(carroAux);
+                            } else{
+                                System.out.println("Renavam já cadastrado!");
+                            }
 
                             break;
 
@@ -103,8 +104,12 @@ public class Main {
 
                             Carro carroAux2 = new Carro(chassi, cor, modelo, renavamAux, cpfDonoAux, m1.getCpf());
 
-                            docDAO.inserirDocumento(docAux);
-                            cDAO.inserirCarro(carroAux2);
+                            if(docDAO.buscaDocExistente(renavamAux) == false) {
+                                docDAO.inserirDocumento(docAux);
+                                cDAO.inserirCarro(carroAux2);
+                            } else{
+                                System.out.println("Renavam já cadastrado!");
+                            }
 
                             break;
 
@@ -176,7 +181,6 @@ public class Main {
                     Manutencao manAux = new Manutencao(contador, statusAux, problemaAux);
                     manDAO.inserirManutencao(manAux);
 
-                    System.out.println(manAux.getId());
                     cmDAO.inserirManutencao(numChassiAux, manAux);
 
                     break;
@@ -271,39 +275,21 @@ public class Main {
                             System.out.println("Opção Inválida!");
                             break;
 
-
                     }
                     break;
 
                 case 6:
                     int escolhaTeste;
-                    /*
-                    System.out.println("Qual teste deseja realizar?");
-                    System.out.println("1 - Motor");
-                    System.out.println("2 - Luzes");
-                    System.out.println("3 - Freios");
-                    escolhaTeste = sc.nextInt();
-                    sc.nextLine();
-
-                     */
-
-                    System.out.println("Em qual carro será feito o teste? (Insira o número do chassi)");
-                    int chassiTeste = sc.nextInt();
-                    sc.nextLine();
 
                     System.out.println("Qual o Id da manutenção testada?");
                     int idTeste = sc.nextInt();
                     sc.nextLine();
 
-                    Carro aux = cDAO.buscaChassiTeste(chassiTeste);
-
-                    m1.verificaProblema(aux);
-
                     System.out.println("O problema foi solucionado? (sim = 1 | nao = 2)");
                     escolhaTeste = sc.nextInt();
                     sc.nextLine();
 
-                    switch (escolhaTeste){
+                    switch (escolhaTeste) {
                         case 1:
                             cmDAO.atualizarStatusManutencao(idTeste, "Concluído!");
                             break;
@@ -315,25 +301,8 @@ public class Main {
                         default:
                             System.out.println("Opção Inválida!");
                             break;
-                    /*
-                    switch (escolhaTeste){
-                        case 1:
-                            m1.verificaMotor(aux);
-                            break;
-                        case 2:
-                            m1.verificaLuzes(aux);
-                            break;
-
-                        case 3:
-                            m1.verificaFreios(aux);
-                            break;
-
-                        default:
-                            System.out.println("Opção Inválida!");
-                            break;
-
-                     */
                     }
+
                     break;
 
                 case 7:
@@ -345,7 +314,6 @@ public class Main {
                     System.out.println("Opção Inválida!");
                     break;
             }
-
         }
         sc.close();
     }

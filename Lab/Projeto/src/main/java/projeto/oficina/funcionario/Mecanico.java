@@ -1,6 +1,5 @@
 package projeto.oficina.funcionario;
 
-import projeto.oficina.carros.Carro;
 import projeto.oficina.interfaces.VerificaStatus;
 
 public class Mecanico implements VerificaStatus {
@@ -20,26 +19,9 @@ public class Mecanico implements VerificaStatus {
     public String getNome() {
         return nome;
     }
-    /*
-    @Override
-    public void verificaMotor(Carro carro) {
-        System.out.println("Realizando teste do motor do " + carro.getModelo());
-    }
 
     @Override
-    public void verificaLuzes(Carro carro) {
-        System.out.println("Realizando teste da iluminação do " + carro.getModelo());
-    }
-
-    @Override
-    public void verificaFreios(Carro carro) {
-        System.out.println("Realizando teste dos freios do " + carro.getModelo());
-    }
-
-    */
-
-    @Override
-    public void verificaProblema(Carro carro) {
+    public void verificaProblema() {
 
     }
 }

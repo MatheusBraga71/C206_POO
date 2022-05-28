@@ -1,10 +1,5 @@
 package projeto.oficina.carros;
 
-import projeto.oficina.DAO.DocumentoDAO;
-import projeto.oficina.manutencao.Manutencao;
-
-import java.util.ArrayList;
-
 public class Carro {
 
     private int numeroChassi;

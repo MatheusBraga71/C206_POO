@@ -4,5 +4,6 @@ import projeto.oficina.carros.Carro;
 
 public interface VerificaStatus {
 
-    void verificaProblema(Carro carro);
+    void verificaProblema();
+
 }

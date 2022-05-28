@@ -1,10 +1,8 @@
 package projeto.oficina.DAO;
 
 import projeto.oficina.carros.Carro;
-import projeto.oficina.documentos.Documento;
 import projeto.oficina.dono.Dono;
 import projeto.oficina.funcionario.Mecanico;
-import projeto.oficina.manutencao.Manutencao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,37 +40,6 @@ public class CarroDAO extends ConnectionDAO{
         }
         return sucesso;
     }
-
-
-
-    /*
-    public boolean atualizarCarro(int numeroChassi, Carro carro) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
-        connectToDB();
-        String sql = "UPDATE Carro SET cor=?, modelo=?, Dono_cpf=? where numeroChassi=?";
-
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setString(1, carro.getCor());
-            pst.setString(2, carro.getModelo());
-            pst.setString(3, carro.getDono_cpf());
-            pst.setInt(4, numeroChassi);
-            pst.execute();
-            sucesso = true;
-
-        } catch(SQLException ex) {
-            System.out.println("Erro = " +  ex.getMessage());
-            sucesso = false;
-        } finally {
-            try {
-                con.close();
-                pst.close();
-            } catch(SQLException exc) {
-                System.out.println("Erro: " + exc.getMessage());
-            }
-        }
-        return sucesso;
-    }
-    */
 
     public boolean atualizarCorCarro(int numeroChassi, String cor) { // Possivelmente fazer uma sobrecarga de método para alterar cada dado da tabela
         connectToDB();
@@ -187,6 +154,7 @@ public class CarroDAO extends ConnectionDAO{
         }
         return listaDeCarros;
     }
+
     public Carro buscarCarroPorNumeroDoChassi(int numeroChassi) {
         connectToDB();
         Carro carroAux = null;
@@ -271,38 +239,4 @@ public class CarroDAO extends ConnectionDAO{
         }
         return donoAux;
     }
-
-    public Carro buscaChassiTeste(int numeroChassi) {
-        connectToDB();
-        Carro carroAux = null;
-        String sql = "SELECT * FROM Carro WHERE numeroChassi = ?";
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, numeroChassi);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                String aux = rs.getString("numeroChassi");
-                if(aux.isEmpty())
-                {
-                    sucesso = false;
-                } else {
-                    carroAux = new Carro(rs.getInt("numeroChassi"), rs.getString("cor"), rs.getString("modelo"), rs.getInt("Documento_renavam"), rs.getString("Dono_cpf"), rs.getString("Mecanico_cpf"));
-                }
-            }
-            sucesso = true;
-        } catch(SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-            sucesso = false;
-        } finally {
-            try {
-                con.close();
-                pst.close();
-            } catch(SQLException e) {
-                System.out.println("Erro: " + e.getMessage());
-            }
-        }
-        return carroAux;
-    }
-
-
 }
