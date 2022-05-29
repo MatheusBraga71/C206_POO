@@ -3,56 +3,50 @@ package exercicioPratico.fetin;
 import exercicioPratico.exceptions.NomeRepetidoException;
 import exercicioPratico.exceptions.NotaInsuficienteException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Projetos {
 
-    private String nome;
-    private double nota;
+    Map<String, Double> mapaProjetos = new HashMap<>();
 
-    Map<String, Double> mapaProjetos = new HashMap<String, Double>();
+    List<String> nomes = new ArrayList<>();
 
-    public Projetos(String nome, double nota) throws NomeRepetidoException{
-        mapaProjetos.forEach((chave, valor) ->{
-            if(chave.equals(nome)){
-                try {
-                    throw new NomeRepetidoException();
-                } catch (NomeRepetidoException e) {
-                    e.printStackTrace();
-                }
-            }
-            else{
-                mapaProjetos.put(nome, nota);
-            }
-        });
+    public void inserirNovoProjeto(String nome, double nota) throws NomeRepetidoException, NotaInsuficienteException{
 
-    }
+        if(!(nomes.contains(nome))){
+            mapaProjetos.put(nome, nota);
+        } else
+            throw new NomeRepetidoException("Esse nome já está em uso!");
+        nomes.add(nome);
 
-
-    public boolean compararNome(String nome){
-        final boolean[] compAux = {false};
-        mapaProjetos.forEach((chave, valor) ->{
-            if(chave.equals(nome)){
-               compAux[0] = true;
-            }
-        });
-        return compAux[0];
+        if(nota >= 60){
+            System.out.println("Projeto aprovado");
+        } else{
+            throw new NotaInsuficienteException("Nota insuficiente para a aprovação!");
+        }
     }
 
     /*
-    public void inserirNoMap(String nome, double nota){
-        mapaProjetos.forEach((chave, valor) ->{
-            if(chave.equals("nome")){
-                throw new NomeRepetidoException("Esse nome já foi utilizado");
-            }
+    public void compararNome(String nome){
+        if(!nomes.contains(nome)){
+            nomes.add(nome);
+        } else{
+            throw new NomeRepetidoException("Esse nome já está em uso!");
+        }
+    }
+
+    */
+
+    public void mostraInfo(){
+        mapaProjetos.forEach((nome, nota) ->{
+            System.out.println("Nome do projeto: " + nome);
+            System.out.println("Nota do projeto: " + nota);
         });
+    }
 
 
-     */
-
-
-
-        //mapaProjetos.put(nome, nota);
 
 }

@@ -1,9 +1,9 @@
 package exercicioPratico.exceptions;
 
-// Exceção do tipo checked
-public class NomeRepetidoException extends Exception {
+// Exceção do tipo unchecked
+public class NomeRepetidoException extends RuntimeException {
 
-    public NomeRepetidoException(){
-        System.out.println("Esse nome já foi usado");
+    public NomeRepetidoException(String mensagem){
+        super(mensagem);
     }
 }

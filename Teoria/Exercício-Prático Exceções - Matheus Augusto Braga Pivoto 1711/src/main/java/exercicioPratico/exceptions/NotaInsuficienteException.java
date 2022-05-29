@@ -1,10 +1,9 @@
 package exercicioPratico.exceptions;
 
-public class NotaInsuficienteException {
-/*
-    public NotaInsuficienteException(){
-        System.out.println("Nota insuficiente para aprovar o projeto");
-    }
+// Exceção do tipo checked
+public class NotaInsuficienteException extends Exception {
 
- */
+    public NotaInsuficienteException(String mensagem) {
+        super(mensagem);
+    }
 }
