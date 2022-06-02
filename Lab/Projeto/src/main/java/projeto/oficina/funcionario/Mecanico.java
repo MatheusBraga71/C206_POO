@@ -1,8 +1,6 @@
 package projeto.oficina.funcionario;
 
-import projeto.oficina.interfaces.VerificaStatus;
-
-public class Mecanico implements VerificaStatus {
+public class Mecanico {
 
     private String cpf;
     private String nome;
@@ -20,8 +18,4 @@ public class Mecanico implements VerificaStatus {
         return nome;
     }
 
-    @Override
-    public void verificaProblema() {
-
-    }
 }
