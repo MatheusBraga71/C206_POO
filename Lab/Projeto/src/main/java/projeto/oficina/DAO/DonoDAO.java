@@ -1,5 +1,6 @@
 package projeto.oficina.DAO;
 
+import org.w3c.dom.ls.LSOutput;
 import projeto.oficina.dono.Dono;
 
 import java.sql.SQLException;
@@ -45,6 +46,7 @@ public class DonoDAO extends ConnectionDAO {
             pst.setString(2, cpf);
             pst.execute();
             sucesso = true;
+            System.out.println("CPF atualizado!");
 
         } catch(SQLException ex) {
             System.out.println("Erro = " +  ex.getMessage());
@@ -70,6 +72,7 @@ public class DonoDAO extends ConnectionDAO {
             pst.setString(2, cpf);
             pst.execute();
             sucesso = true;
+            System.out.println("Nome atualizado!");
 
         } catch(SQLException ex) {
             System.out.println("Erro = " +  ex.getMessage());
